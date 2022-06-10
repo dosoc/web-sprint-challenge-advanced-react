@@ -18,8 +18,6 @@ const initialState = {
 
 export default class AppClass extends React.Component {
   state = initialState
-  // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
-  // You can delete them and build your own logic from scratch.
 
   getXY = (idx) => {
     let x,y;
@@ -33,19 +31,10 @@ export default class AppClass extends React.Component {
     if (idx === 7){x=2; y=3}
     if (idx === 8){x=3; y=3}
     return {x, y}
-    // It it not necessary to have a state to track the coordinates.
-    // It's enough to know what index the "B" is at, to be able to calculate them.
-  }
-
-  getXYMessage = () => {
-    // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
-    // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
-    // returns the fully constructed string.
   }
 
   reset = () => {
     this.setState(initialState)
-    // Use this helper to reset all states to their initial values.
   }
 
   getNextIndex = (direction) => {
@@ -84,9 +73,6 @@ export default class AppClass extends React.Component {
       move,
       message
     }
-    // This helper takes a direction ("left", "up", etc) and calculates what the next index
-    // of the "B" would be. If the move is impossible because we are at the edge of the grid,
-    // this helper should return the current index unchanged.
   }
 
   move = (evt) => {
@@ -101,8 +87,6 @@ export default class AppClass extends React.Component {
       index: newIndex,
       steps: move? this.state.steps +1: this.state.steps
     })
-    // This event handler can use the helper above to obtain a new index for the "B",
-    // and change any states accordingly.
   }
 
   onChange = (evt) => {
@@ -123,10 +107,10 @@ export default class AppClass extends React.Component {
     }
     axios.post("http://localhost:9000/api/result", payload)
       .then((res)=> {
-      console.log(res.data.message)
       this.setState({
         ...this.state,
-        message: res.data.message
+        message: res.data.message,
+        email: ''
       })
     }).catch((err)=> {
       console.log(err)
