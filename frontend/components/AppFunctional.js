@@ -122,7 +122,10 @@ export default function AppFunctional(props) {
         email: ''
       })
     }).catch((err)=> {
-      console.log(err)
+      setState({
+        ...state,
+        message: err.response.data.message
+      })
     })
   }
 

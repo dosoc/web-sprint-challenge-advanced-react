@@ -120,12 +120,12 @@ export default class AppClass extends React.Component {
         email: ''
       })
     }).catch((err)=> {
-      console.log(err)
+      this.setState({
+        ...this.state,
+        message: err.response.data.message
+      })
     })
     }
-    
-
-    // Use a POST request to send a payload to the server.
   }
 
   render() {
