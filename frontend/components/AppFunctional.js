@@ -101,6 +101,13 @@ export default function AppFunctional(props) {
 
   const onSubmit = (evt) => {
     evt.preventDefault()
+    if (!state.email) {
+      setState({
+        ...state,
+        message: "Ouch: email is required",
+        email: ""
+      })
+    }
     const payload = {
       x: state.xCord,
       y: state.yCord,
@@ -123,7 +130,7 @@ export default function AppFunctional(props) {
     <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">Coordinates ({state.xCord}, {state.yCord})</h3>
-          <h3 id="steps">You moved {state.steps} times</h3>
+          <h3 id="steps">You moved {state.steps} {state.steps === 1? `time`: `times`}</h3>
         </div>
         <div id="grid">
           {

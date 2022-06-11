@@ -99,7 +99,14 @@ export default class AppClass extends React.Component {
 
   onSubmit = (evt) => {
     evt.preventDefault()
-    const payload = {
+    if (!this.state.email){
+      this.setState({
+        ...this.state,
+        message: "Ouch: email is required",
+        email: ""
+      })
+    } else {
+      const payload = {
       x: this.state.xCord,
       y: this.state.yCord,
       steps: this.state.steps,
@@ -115,6 +122,8 @@ export default class AppClass extends React.Component {
     }).catch((err)=> {
       console.log(err)
     })
+    }
+    
 
     // Use a POST request to send a payload to the server.
   }
@@ -125,7 +134,7 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">Coordinates ({this.state.xCord}, {this.state.yCord})</h3>
-          <h3 id="steps">You moved {this.state.steps} times</h3>
+          <h3 id="steps">You moved {this.state.steps} {this.state.steps === 1? `time`: `times`}</h3>
         </div>
         <div id="grid">
           {
